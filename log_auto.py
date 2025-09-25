@@ -1,6 +1,7 @@
 import os
 import zipfile
 import shutil
+import sys
 
 def open_file(path):
     os.startfile(path)
@@ -31,8 +32,13 @@ def get_file_from_path(input_path):
     return curr_path
 
 if __name__ == "__main__":
-    input_path = r"C:\karthik\01_admin\ajay\02_user\xyz\01_abc\02_def\sample\sample.log"
-    
+    # Check if command line argument is given
+    if len(sys.argv) != 2:
+        print("Usage: python script.py <full_file_path>")
+        sys.exit(1)
+
+    input_path = sys.argv[1]  # Take input from command line
+
     final_file = get_file_from_path(input_path)
 
     if os.path.isfile(final_file):
@@ -45,6 +51,7 @@ if __name__ == "__main__":
         open_file(dest_file)
     else:
         print("File not found:", final_file)
+
 
 
 
@@ -78,4 +85,5 @@ if input_path.startswith(UNC_ROOT):
     print(new_path)
 else:
     print("Input path does not start with expected UNC root.")
+
 
